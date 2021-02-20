@@ -1,16 +1,25 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+import { TouchableHighlight } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
 import colors from '../config/colors';
 import AppText from './AppText';
-const ListItem = ({ avatar, title, subtitle }) => {
+
+const ListItem = ({ avatar, title, subtitle, renderRightActions, IconComponent }) => {
   return (
-    <View style={styles.contianer}>
-      <Image style={styles.avatar} source={avatar}/>
-      <View style={styles.titleContainer}>
-        <AppText customStyle={styles.title}>{title}</AppText>
-        <AppText customStyle={styles.subtitle}>{subtitle}</AppText>
-      </View>
-    </View>
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight underlayColor={colors.light}>
+        <View style={styles.contianer}>
+          {avatar && <Image style={styles.avatar} source={avatar} />}
+          {!avatar && IconComponent}
+          <View style={styles.titleContainer}>
+            <AppText customStyle={styles.title}>{title}</AppText>
+            {subtitle && <AppText customStyle={styles.subtitle}>{subtitle}</AppText>}
+          </View>
+        </View>
+      </TouchableHighlight>
+    </Swipeable>
   );
 };
 
@@ -24,16 +33,17 @@ const styles = StyleSheet.create({
   },
   contianer: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
+    padding: 16,
   },
   title: {
-    fontWeight: '600'
+    fontWeight: '500',
   },
   titleContainer: {
     flexDirection: 'column',
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+    justifyContent: 'center',
   },
   subtitle: {
-    color: colors.medium
+    color: colors.medium,
   },
 });
