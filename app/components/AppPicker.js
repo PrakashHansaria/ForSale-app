@@ -9,16 +9,20 @@ import Screen from './Screen';
 const AppPicker = ({ iconName, itemList, placeholder, selectedItem, setSelectedItem }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const handleItemSelection = (item) => {
-    setModalIsOpen(false)
-    setSelectedItem(item)
-  }
+    setModalIsOpen(false);
+    setSelectedItem(item);
+  };
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalIsOpen(true)}>
         <View style={styles.container}>
           {iconName && <MaterialCommunityIcons name={iconName} color={colors.medium} size={20} />}
-          <AppText customStyle={styles.text}>{selectedItem? selectedItem.label : placeholder}</AppText>
+          {selectedItem ? (
+            <AppText customStyle={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText customStyle={styles.placeholder}>{placeholder}</AppText>
+          )}
           <MaterialCommunityIcons name="chevron-down" color={colors.medium} size={20} />
         </View>
       </TouchableWithoutFeedback>
@@ -43,14 +47,21 @@ export default AppPicker;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    borderRadius: 100,
+    borderRadius: 35,
     backgroundColor: colors.light,
     width: '100%',
     padding: 16,
     alignItems: 'center',
+    marginVertical: 8,
+  },
+  placeholder: {
+    flex: 1,
+    marginHorizontal: 16,
+    color: colors.medium,
   },
   text: {
     marginHorizontal: 16,
     flex: 1,
+    color: colors.dark,
   },
 });
