@@ -4,16 +4,17 @@ import AppText from '../components/AppText';
 import ListItem from '../components/ListItem';
 import colors from '../config/colors';
 
-const ListingDetailsScreen = () => {
+const ListingDetailsScreen = ({ route }) => {
+  const listing = route.params;
   return (
     <View>
-      <Image source={require('../assets/blackstratblues.jpg')} style={styles.image} />
+      <Image source={listing.image} style={styles.image} />
       <View style={styles.titleContainer}>
-        <AppText  customStyle={styles.title}>Blackstratblues Latest album</AppText>
-        <AppText  customStyle={styles.subTitle}>$50</AppText>
+        <AppText customStyle={styles.title}>{listing.title}</AppText>
+        <AppText customStyle={styles.subTitle}>{listing.price}</AppText>
       </View>
       <View style={styles.userContainer}>
-        <ListItem avatar={require('../assets/namo.png')} title={'Modi Ji'} subtitle={'28 Listings'}/>
+        <ListItem avatar={require('../assets/namo.png')} title={'Modi Ji'} subtitle={'28 Listings'} />
       </View>
     </View>
   );
@@ -28,15 +29,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    marginBottom: 8
+    marginBottom: 8,
   },
   titleContainer: {
-    padding: 16
+    padding: 16,
   },
   subTitle: {
-    color: colors.secondary
+    color: colors.secondary,
   },
-  userContainer:{
-    marginVertical: 24
-  }
+  userContainer: {
+    marginVertical: 24,
+  },
 });

@@ -6,17 +6,22 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import colors from '../config/colors';
 import AppText from './AppText';
 
-
-const ListItem = ({ avatar, title, subtitle, renderRightActions, IconComponent }) => {
+const ListItem = ({ avatar, title, subtitle, renderRightActions, IconComponent, onPressAction }) => {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight underlayColor={colors.light}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onPressAction}>
         <View style={styles.contianer}>
           {avatar && <Image style={styles.avatar} source={avatar} />}
           {!avatar && IconComponent}
           <View style={styles.titleContainer}>
-            <AppText customStyle={styles.title} numberOfLines={1}>{title}</AppText>
-            {subtitle && <AppText customStyle={styles.subtitle} numberOfLines={2}>{subtitle}</AppText>}
+            <AppText customStyle={styles.title} numberOfLines={1}>
+              {title}
+            </AppText>
+            {subtitle && (
+              <AppText customStyle={styles.subtitle} numberOfLines={2}>
+                {subtitle}
+              </AppText>
+            )}
           </View>
           <MaterialCommunityIcons name="chevron-right" color={colors.dark} size={25} />
         </View>

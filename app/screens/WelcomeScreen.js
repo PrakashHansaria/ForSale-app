@@ -3,19 +3,18 @@ import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
 import colors from '../config/colors';
+import { LOGIN, REGISTER } from '../constants/NavigationScreens';
 
-
-
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
   return (
     <ImageBackground blurRadius={2} source={require('../assets/background.jpg')} style={styles.container}>
       <View style={styles.logoContainer}>
         <Image source={require('../assets/logo-red.png')} style={styles.logo} />
-        <AppText>Sell things you don;t need</AppText>
+        <AppText>Sell things you don't need</AppText>
       </View>
       <View style={styles.buttonContainer}>
-        <AppButton title="Login" onPressAction={() => console.log('tapped')} customStyle={styles.loginButton} />
-        <AppButton title="Register" onPressAction={() => console.log('tapped')} customStyle={styles.registerButton} />
+        <AppButton title="Login" onPressAction={() => navigation.navigate(LOGIN)} customStyle={styles.loginButton} />
+        <AppButton title="Register" onPressAction={() => navigation.navigate(REGISTER)} customStyle={styles.registerButton} />
       </View>
     </ImageBackground>
   );
